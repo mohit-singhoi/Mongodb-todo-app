@@ -57,15 +57,11 @@ export const updateTodo = async (req, res) => {
 };
 
 
-
-};
-
 export const allTodos = async (req, res) => {
-
-
-
-
-    
-
-
+    try{
+        const todos = await Todo.find().sort({ createdAt: -1 });
+        res.status(200).json({ count: todos.length, todos });
+    } catch (error) {
+        res.status(500).json({ errors: error.message });
+    }
 };
